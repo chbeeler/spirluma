@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import productImage from '../assets/spirluma-product.jpeg';
 import danceImage from '../assets/spirluma-dance.jpeg';
 import friendsImage from '../assets/spirluma-friends.jpeg';
+import videoPoster from '../assets/spirluma-video-poster.jpg';
 
 const pageTitle = 'Spirluma — Wear the glow';
 const pageDescription = 'Spirluma is a glowing LED filament necklace made for nights that deserve their own light.';
@@ -87,7 +88,7 @@ const pageDescription = 'Spirluma is a glowing LED filament necklace made for ni
 						<div class="demo-halo halo-two"></div>
 						<div class="demo-halo halo-one"></div>
 						<svg class="demo-spiral" viewBox="0 0 300 300" aria-label="Illustration of the Spirluma light spiral">
-							<path d="M223 69c-40-40-105-40-145 0s-40 105 0 145 105 40 145 0 40-105 0-145-86-40-126 0-40 86 0 126 68 28 96 0 28-68 0-96-50-21-71 0-21 50 0 71 32 14 46 0 14-32 0-46-16-8-24 0-8 16 0 24 10 4 14 0" />
+							<path pathLength="1000" d="M150 150 L150.7 150.1 L151.3 150.5 L151.8 151.2 L152.1 152 L152.1 153 L151.7 154 L151.1 154.9 L150.2 155.8 L148.9 156.4 L147.5 156.8 L145.9 156.8 L144.1 156.4 L142.4 155.6 L140.9 154.3 L139.5 152.7 L138.5 150.7 L137.8 148.4 L137.7 145.8 L138.1 143.2 L139.1 140.6 L140.6 138.1 L142.8 135.9 L145.4 134 L148.5 132.7 L151.9 132 L155.5 132 L159.2 132.8 L162.8 134.3 L166.1 136.6 L169 139.6 L171.3 143.2 L173 147.3 L173.8 151.8 L173.7 156.5 L172.7 161.2 L170.7 165.8 L167.7 170 L163.9 173.7 L159.4 176.6 L154.2 178.6 L148.6 179.6 L142.8 179.5 L137 178.2 L131.4 175.8 L126.3 172.3 L121.9 167.7 L118.3 162.2 L115.9 156.1 L114.6 149.4 L114.7 142.5 L116.1 135.6 L118.9 128.9 L123 122.9 L128.3 117.6 L134.6 113.4 L141.8 110.4 L149.5 108.8 L157.5 108.8 L165.5 110.3 L173.2 113.4 L180.3 118 L186.5 124 L191.4 131.1 L195 139.3 L196.9 148 L197.1 157.2 L195.6 166.3 L192.2 175.1 L187.2 183.2 L180.6 190.3 L172.6 196 L163.6 200.2 L153.8 202.6 L143.5 203.1 L133.3 201.5 L123.3 198 L114.2 192.6 L106.1 185.4 L99.5 176.7 L94.7 166.7 L91.8 155.9 L91 144.5 L92.4 133.1 L96.1 122.1 L101.9 111.9 L109.6 102.8 L119 95.3 L129.8 89.7 L141.7 86.2 L154.1 85.1 L166.6 86.4 L178.8 90.1 L190.2 96.1 L200.3 104.3 L208.7 114.4 L215.1 126.1 L219.2 138.9 L220.8 152.4 L219.7 166 L216 179.4 L209.8 191.9 L201.1 203.1 L190.4 212.5 L178 219.8 L164.2 224.5 L149.7 226.6 L134.9 225.8 L120.4 222.2 L106.7 215.8 L94.4 206.8 L83.9 195.5 L75.8 182.3 L70.3 167.6 L67.7 152.1 L68.1 136.1 L71.6 120.5 L78.1 105.6 L87.4 92.2 L99.2 80.6 L113.1 71.5 L128.6 65.2 L145.2 62 L162.2 62 L179.1 65.3 L195.2 71.8 L209.8 81.3 L222.4 93.6 L232.5 108.2 L239.7 124.6 L243.6 142.1 L244.1 160.3 L241.1 178.3 L234.6 195.6 L224.9 211.4 L212.2 225.2 L197 236.3 L179.8 244.4 L161.3 249.1 L142 250.1 L122.8 247.4 L104.3 241.1 L87.3 231.2 L72.4 218.2 L60.1 202.4 L51.1 184.5 L45.6 165 L43.9 144.7 L46.2 124.3 L52.4 104.6 L62.3 86.3" />
 						</svg>
 						<span class="demo-label">LIGHT STUDY / 01</span>
 					</div>
@@ -127,9 +128,9 @@ const pageDescription = 'Spirluma is a glowing LED filament necklace made for ni
 							<figcaption><span>Better together</span><span>02</span></figcaption>
 						</figure>
 						<figure class="gallery-item video-item reveal" style="--delay: 140ms">
-							<Image class="video-poster" src={danceImage} alt="" widths={[500, 760]} sizes="(max-width: 720px) 100vw, 38vw" quality={78} />
+							<Image class="video-poster" src={videoPoster} alt="Spirluma pendant ready to light up" widths={[500, 760]} sizes="(max-width: 720px) 100vw, 38vw" quality={80} />
 							<video class="gallery-video" muted loop playsinline preload="none" aria-label="Spirluma in motion at night" data-lazy-video>
-								<source data-src="/media/spirluma-in-motion.MOV" type="video/quicktime" />
+								<source data-src="/media/spirluma-glow.mp4" type="video/mp4" />
 							</video>
 							<button class="video-toggle" type="button" aria-label="Play video"><span class="play-icon" aria-hidden="true">▶</span><span class="pause-icon" aria-hidden="true">Ⅱ</span></button>
 							<figcaption><span>See it move</span><span>03</span></figcaption>
@@ -196,10 +197,13 @@ const pageDescription = 'Spirluma is a glowing LED filament necklace made for ni
 			const video = document.querySelector('[data-lazy-video]');
 			const videoButton = document.querySelector('.video-toggle');
 			if (video instanceof HTMLVideoElement && videoButton instanceof HTMLButtonElement) {
+				let videoLoaded = false;
 				const loadVideo = () => {
+					if (videoLoaded) return;
 					video.querySelectorAll('source[data-src]').forEach((source) => {
 						if (source instanceof HTMLSourceElement && source.dataset.src) source.src = source.dataset.src;
 					});
+					videoLoaded = true;
 					video.load();
 				};
 				new IntersectionObserver((entries, observer) => {
@@ -208,6 +212,7 @@ const pageDescription = 'Spirluma is a glowing LED filament necklace made for ni
 				video.addEventListener('loadeddata', () => video.classList.add('is-ready'));
 				videoButton.addEventListener('click', async () => {
 					if (video.paused) {
+						loadVideo();
 						try { await video.play(); videoButton.classList.add('is-playing'); videoButton.setAttribute('aria-label', 'Pause video'); }
 						catch { videoButton.setAttribute('aria-label', 'This video format is not supported by your browser'); }
 					}
@@ -343,7 +348,7 @@ const pageDescription = 'Spirluma is a glowing LED filament necklace made for ni
 			.effect-card { display: grid; grid-template-columns: 1.08fr .92fr; min-height: 650px; background: var(--surface); border: 1px solid var(--outline); border-radius: var(--radius); overflow: hidden; }
 			.effect-demo { position: relative; display: grid; place-items: center; min-height: 590px; overflow: hidden; background: radial-gradient(circle, #302719 0, #181716 44%, #121213 72%); }
 			.demo-spiral { position: relative; z-index: 2; width: min(60%, 370px); overflow: visible; }
-			.demo-spiral path, .contact-spiral path { fill: none; stroke: var(--gold); stroke-width: 12; stroke-linecap: round; filter: drop-shadow(0 0 8px #ffad1f) drop-shadow(0 0 20px rgba(255,171,31,.65)); stroke-dasharray: 930; stroke-dashoffset: 0; transition: stroke-width .55s ease, filter .55s ease, stroke-dashoffset .85s ease; }
+			.demo-spiral path, .contact-spiral path { fill: none; stroke: var(--gold); stroke-width: 12; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 8px #ffad1f) drop-shadow(0 0 20px rgba(255,171,31,.65)); stroke-dasharray: 1000; stroke-dashoffset: 0; transition: stroke-width .55s ease, filter .55s ease, stroke-dashoffset .85s ease; }
 			.demo-halo { position: absolute; border-radius: 50%; border: 1px solid rgba(255,198,66,.14); transition: opacity .55s ease, transform .55s ease; }
 			.halo-one { width: 46%; aspect-ratio: 1; box-shadow: 0 0 60px rgba(255,171,31,.14); }
 			.halo-two { width: 64%; aspect-ratio: 1; }
