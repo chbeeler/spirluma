@@ -68,8 +68,8 @@ const spiralPath = Array.from({ length: 261 }, (_, index) => {
 					<h1 id="hero-title">Wear the<br /><em>glow.</em></h1>
 					<p class="hero-intro">A luminous spiral for dance floors, midnight walks and every beautifully strange place in between.</p>
 					<div class="hero-actions">
-						<a class="button button-primary" href="#gallery">See it shine <span aria-hidden="true">↘</span></a>
-						<a class="text-link" href="#contact">Waitlist <span aria-hidden="true">→</span></a>
+						<a class="button button-primary" href="#contact">Waitlist <span aria-hidden="true">→</span></a>
+						<a class="text-link" href="#gallery">See it shine <span aria-hidden="true">↘</span></a>
 					</div>
 				</div>
 
@@ -641,28 +641,30 @@ const spiralPath = Array.from({ length: 261 }, (_, index) => {
 				.site-nav { position: fixed; inset: 0; display: flex; flex-direction: column; justify-content: center; gap: 30px; background: rgba(15,15,16,.97); opacity: 0; pointer-events: none; transition: opacity .2s ease; }
 				.site-nav a { font-size: 1rem; }
 				.site-nav.is-open { opacity: 1; pointer-events: auto; }
-				.hero { display: flex; flex-direction: column; align-items: stretch; padding: 112px 14px 80px; min-height: auto; }
+				.hero { display: flex; flex-direction: column; align-items: stretch; padding: 112px 14px 42px; min-height: auto; }
 				.hero::before { width: 100%; }
 				.hero-copy { padding: 0; }
 				h1 { font-size: clamp(4.5rem, 23vw, 7rem); }
 				.hero-intro { margin-top: 26px; }
-				.hero-actions { align-items: flex-start; flex-direction: column; gap: 13px; margin-top: 30px; }
+				.hero-actions { align-items: center; flex-direction: row; flex-wrap: nowrap; gap: 14px; margin-top: 30px; }
+				.hero-actions .button { min-height: 50px; padding-inline: 18px; gap: 12px; white-space: nowrap; }
+				.hero-actions .text-link { gap: 10px; white-space: nowrap; }
 				.hero-visual { width: 100%; margin-top: 64px; }
 				.hero-frame { border-radius: 22px; }
 				.visual-caption { display: none; }
 				.scroll-cue { display: none; }
-				.manifesto { padding: 95px 0; display: block; }
+				.manifesto { padding: 52px 0 78px; display: block; }
 				.manifesto .section-number { margin-bottom: 52px; }
 				.manifesto h2 { font-size: 3.55rem; }
 				.manifesto-body { margin-top: 34px; }
-				.effect-section { padding-bottom: 100px; }
+				.effect-section { padding-bottom: 52px; }
 				.effect-card { min-height: 0; }
 				.effect-demo { min-height: 430px; }
 				.demo-spiral { width: 68%; }
 				.effect-copy { padding: 54px 24px 40px; }
 				.effect-copy h2 { font-size: 3.8rem; }
 				.effect-tabs { margin-inline: -4px; }
-				.specs-section { padding-bottom: 100px; }
+				.specs-section { padding: 0 0 68px; }
 				.specs-heading { display: block; margin-bottom: 42px; }
 				.specs-heading h2 { font-size: 4.1rem; }
 				.specs-heading > p { margin-top: 30px; }
@@ -678,7 +680,7 @@ const spiralPath = Array.from({ length: 261 }, (_, index) => {
 				.spec-symbol { top: 15px; left: 16px; font-size: 1.8rem; }
 				.sound-wave { width: 100%; height: 72px; align-self: center; gap: 4px; }
 				.sound-wave span { width: 3px; }
-				.gallery-section { padding-bottom: 100px; }
+				.gallery-section { padding: 0 0 52px; }
 				.gallery-heading { display: block; margin-bottom: 42px; }
 				.gallery-heading h2 { font-size: 4.1rem; }
 				.gallery-heading > p { margin-top: 30px; }
