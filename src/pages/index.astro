@@ -69,7 +69,7 @@ const spiralPath = Array.from({ length: 261 }, (_, index) => {
 					<p class="hero-intro">A luminous spiral for dance floors, midnight walks and every beautifully strange place in between.</p>
 					<div class="hero-actions">
 						<a class="button button-primary" href="#gallery">See it shine <span aria-hidden="true">↘</span></a>
-						<a class="text-link" href="#story">Discover Spirluma <span aria-hidden="true">→</span></a>
+						<a class="text-link" href="#contact">Waitlist <span aria-hidden="true">→</span></a>
 					</div>
 				</div>
 
@@ -147,10 +147,13 @@ const spiralPath = Array.from({ length: 261 }, (_, index) => {
 						</figure>
 						<figure class="gallery-item video-item reveal" style="--delay: 140ms">
 							<Image class="video-poster" src={videoPoster} alt="Spirluma pendant ready to light up" widths={[500, 760]} sizes="(max-width: 720px) 100vw, 38vw" quality={80} />
-							<video class="gallery-video" playsinline preload="none" aria-label="Spirluma reacting to music at night" data-lazy-video>
+							<video class="gallery-video" autoplay muted loop playsinline preload="none" aria-label="Spirluma reacting to music at night" data-lazy-video>
 								<source data-src="/media/spirluma-glow.mp4" type="video/mp4" />
 							</video>
-							<button class="video-toggle" type="button" aria-label="Play video with sound"><span class="play-icon" aria-hidden="true">▶</span><span class="pause-icon" aria-hidden="true">Ⅱ</span></button>
+							<button class="video-sound-toggle" type="button" aria-label="Unmute video" aria-pressed="false">
+								<svg class="sound-off-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M11 5 6.8 8.5H3.5v7h3.3L11 19V5Z"/><path d="m16 9 5 5m0-5-5 5"/></svg>
+								<svg class="sound-on-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M11 5 6.8 8.5H3.5v7h3.3L11 19V5Z"/><path d="M15 9.2a4 4 0 0 1 0 5.6M17.8 6.5a7.7 7.7 0 0 1 0 11"/></svg>
+							</button>
 							<figcaption><span>See it move</span><span>03</span></figcaption>
 						</figure>
 					</div>
@@ -275,7 +278,7 @@ const spiralPath = Array.from({ length: 261 }, (_, index) => {
 			});
 
 			const video = document.querySelector('[data-lazy-video]');
-			const videoButton = document.querySelector('.video-toggle');
+			const videoButton = document.querySelector('.video-sound-toggle');
 			if (video instanceof HTMLVideoElement && videoButton instanceof HTMLButtonElement) {
 				let videoLoaded = false;
 				const loadVideo = () => {
@@ -287,20 +290,21 @@ const spiralPath = Array.from({ length: 261 }, (_, index) => {
 					video.load();
 				};
 				new IntersectionObserver((entries, observer) => {
-					if (entries[0]?.isIntersecting) { loadVideo(); observer.disconnect(); }
+					if (entries[0]?.isIntersecting) {
+						loadVideo();
+						video.play().catch(() => {});
+						observer.disconnect();
+					}
 				}, { rootMargin: '200px' }).observe(video);
 				video.addEventListener('loadeddata', () => video.classList.add('is-ready'));
-				video.addEventListener('ended', () => {
-					videoButton.classList.remove('is-playing');
-					videoButton.setAttribute('aria-label', 'Play video with sound');
-				});
 				videoButton.addEventListener('click', async () => {
-					if (video.paused) {
-						loadVideo();
-						try { await video.play(); videoButton.classList.add('is-playing'); videoButton.setAttribute('aria-label', 'Pause video'); }
-						catch { videoButton.setAttribute('aria-label', 'This video format is not supported by your browser'); }
-					}
-					else { video.pause(); videoButton.classList.remove('is-playing'); videoButton.setAttribute('aria-label', 'Play video with sound'); }
+					loadVideo();
+					video.muted = !video.muted;
+					const soundIsOn = !video.muted;
+					videoButton.classList.toggle('is-unmuted', soundIsOn);
+					videoButton.setAttribute('aria-pressed', String(soundIsOn));
+					videoButton.setAttribute('aria-label', soundIsOn ? 'Mute video' : 'Unmute video');
+					if (video.paused) await video.play().catch(() => {});
 				});
 			}
 
@@ -565,9 +569,12 @@ const spiralPath = Array.from({ length: 261 }, (_, index) => {
 			.video-item { isolation: isolate; }
 			.video-item video { position: absolute; inset: 0; z-index: 1; opacity: 0; transition: opacity .35s ease, transform .8s cubic-bezier(.2,.75,.3,1); }
 			.video-item video.is-ready { opacity: 1; }
-			.video-toggle { position: absolute; z-index: 4; inset: 50% auto auto 50%; translate: -50% -50%; width: 66px; height: 66px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.5); border-radius: 50%; background: rgba(15,15,16,.5); backdrop-filter: blur(8px); color: #fff; cursor: pointer; }
-			.pause-icon, .video-toggle.is-playing .play-icon { display: none; }
-			.video-toggle.is-playing .pause-icon { display: inline; }
+			.video-sound-toggle { position: absolute; z-index: 4; right: 18px; bottom: 50px; width: 42px; height: 42px; display: grid; place-items: center; padding: 0; border: 1px solid rgba(255,255,255,.34); border-radius: 50%; background: rgba(15,15,16,.66); backdrop-filter: blur(8px); color: #fff; cursor: pointer; transition: background .2s ease, border-color .2s ease, transform .2s ease; }
+			.video-sound-toggle:hover { border-color: rgba(255,255,255,.7); background: rgba(15,15,16,.82); transform: scale(1.05); }
+			.video-sound-toggle:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+			.video-sound-toggle svg { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+			.sound-on-icon, .video-sound-toggle.is-unmuted .sound-off-icon { display: none; }
+			.video-sound-toggle.is-unmuted .sound-on-icon { display: block; }
 
 			.contact-section { position: relative; min-height: 680px; margin-bottom: 28px; padding: clamp(42px, 6vw, 82px); overflow: hidden; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--outline); isolation: isolate; }
 			.contact-section::before { content: ''; position: absolute; inset: 0; background: linear-gradient(120deg, rgba(255,255,255,.025), transparent 55%); z-index: -1; }
