@@ -184,9 +184,6 @@ const spiralPath = Array.from({ length: 261 }, (_, index) => {
 					<article class="spec-card reveal" style="--delay: 120ms">
 						<span class="spec-symbol" aria-hidden="true">◌</span><p>Configurable Brightness</p><h3>Set your<br />own glow.</h3><span class="spec-index">04</span>
 					</article>
-					<article class="spec-card reveal" style="--delay: 150ms">
-						<span class="spec-symbol" aria-hidden="true">⌁</span><p>3D printed</p><h3>A case with<br />character.</h3><span class="spec-index">05</span>
-					</article>
 				</div>
 			</section>
 
@@ -346,9 +343,13 @@ const spiralPath = Array.from({ length: 261 }, (_, index) => {
 							headers: { Accept: 'application/json' },
 							body: data
 						});
-						const result = await response.json().catch(() => ({})) as { errors?: Array<{ message?: string }> };
+						const result = await response.json().catch(() => ({})) as {
+							error?: string;
+							message?: string;
+							errors?: Array<{ message?: string }>;
+						};
 						if (!response.ok) {
-							const details = result.errors?.map((item) => item.message).filter(Boolean).join(' ');
+							const details = result.errors?.map((item) => item.message).filter(Boolean).join(' ') || result.error || result.message;
 							throw new Error(details || 'Your message could not be sent. Please try again.');
 						}
 
