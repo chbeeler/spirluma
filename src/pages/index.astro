@@ -74,8 +74,6 @@ const spiralPath = Array.from({ length: 261 }, (_, index) => {
 				</div>
 
 				<div class="hero-visual reveal" style="--delay: 120ms">
-					<div class="orbit orbit-one"></div>
-					<div class="orbit orbit-two"></div>
 					<div class="hero-frame">
 						<Image src={productImage} alt="Spirluma's glowing spiral pendant on a dark surface" widths={[560, 900, 1200]} sizes="(max-width: 720px) 92vw, 50vw" loading="eager" fetchpriority="high" quality={82} />
 						<div class="hero-frame-shade"></div>
@@ -149,10 +147,10 @@ const spiralPath = Array.from({ length: 261 }, (_, index) => {
 						</figure>
 						<figure class="gallery-item video-item reveal" style="--delay: 140ms">
 							<Image class="video-poster" src={videoPoster} alt="Spirluma pendant ready to light up" widths={[500, 760]} sizes="(max-width: 720px) 100vw, 38vw" quality={80} />
-							<video class="gallery-video" muted loop playsinline preload="none" aria-label="Spirluma in motion at night" data-lazy-video>
+							<video class="gallery-video" playsinline preload="none" aria-label="Spirluma reacting to music at night" data-lazy-video>
 								<source data-src="/media/spirluma-glow.mp4" type="video/mp4" />
 							</video>
-							<button class="video-toggle" type="button" aria-label="Play video"><span class="play-icon" aria-hidden="true">▶</span><span class="pause-icon" aria-hidden="true">Ⅱ</span></button>
+							<button class="video-toggle" type="button" aria-label="Play video with sound"><span class="play-icon" aria-hidden="true">▶</span><span class="pause-icon" aria-hidden="true">Ⅱ</span></button>
 							<figcaption><span>See it move</span><span>03</span></figcaption>
 						</figure>
 					</div>
@@ -292,13 +290,17 @@ const spiralPath = Array.from({ length: 261 }, (_, index) => {
 					if (entries[0]?.isIntersecting) { loadVideo(); observer.disconnect(); }
 				}, { rootMargin: '200px' }).observe(video);
 				video.addEventListener('loadeddata', () => video.classList.add('is-ready'));
+				video.addEventListener('ended', () => {
+					videoButton.classList.remove('is-playing');
+					videoButton.setAttribute('aria-label', 'Play video with sound');
+				});
 				videoButton.addEventListener('click', async () => {
 					if (video.paused) {
 						loadVideo();
 						try { await video.play(); videoButton.classList.add('is-playing'); videoButton.setAttribute('aria-label', 'Pause video'); }
 						catch { videoButton.setAttribute('aria-label', 'This video format is not supported by your browser'); }
 					}
-					else { video.pause(); videoButton.classList.remove('is-playing'); videoButton.setAttribute('aria-label', 'Play video'); }
+					else { video.pause(); videoButton.classList.remove('is-playing'); videoButton.setAttribute('aria-label', 'Play video with sound'); }
 				});
 			}
 
@@ -476,9 +478,6 @@ const spiralPath = Array.from({ length: 261 }, (_, index) => {
 			.hero-frame { position: relative; container-type: inline-size; overflow: hidden; border-radius: 28px; border: 1px solid rgba(255,255,255,.08); box-shadow: 0 40px 100px rgba(0,0,0,.45); }
 			.hero-frame img { display: block; width: 100%; height: auto; }
 			.hero-frame-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(15,15,16,.18), transparent 45%, rgba(15,15,16,.18)); pointer-events: none; }
-			.orbit { position: absolute; border: 1px solid rgba(255,198,66,.2); border-radius: 50%; pointer-events: none; }
-			.orbit-one { width: 115%; aspect-ratio: 1; top: -6%; left: -8%; transform: rotate(-12deg); }
-			.orbit-two { width: 88%; aspect-ratio: 1; bottom: -9%; right: -18%; border-style: dashed; animation: rotate 28s linear infinite; }
 			.product-note { position: absolute; display: flex; align-items: center; gap: 8px; padding: 6px 12px 6px 6px; border: 1px solid rgba(255,255,255,.2); border-radius: 99px; background: rgba(15,15,16,.88); color: var(--text); font-size: clamp(.55rem, 2cqw, .65rem); letter-spacing: .1em; white-space: nowrap; text-transform: uppercase; }
 			.product-note span { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; border: 1px solid rgba(255,255,255,.18); color: var(--gold); }
 			.product-note::after { content: ''; position: absolute; left: 50%; width: 1px; background: var(--gold); pointer-events: none; }
@@ -605,7 +604,6 @@ const spiralPath = Array.from({ length: 261 }, (_, index) => {
 			.js .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease var(--delay, 0ms), transform .7s ease var(--delay, 0ms); }
 			.js .reveal.is-visible { opacity: 1; transform: translateY(0); }
 
-			@keyframes rotate { to { transform: rotate(348deg); } }
 			@keyframes draw { from { stroke-dashoffset: 1000; } to { stroke-dashoffset: 0; } }
 			@keyframes breathe { 50% { transform: scale(1.07); opacity: .45; } }
 			@keyframes sound { to { transform: scaleY(.35); opacity: .65; } }
