@@ -666,10 +666,18 @@ const spiralPath = Array.from({ length: 261 }, (_, index) => {
 				.specs-heading { display: block; margin-bottom: 42px; }
 				.specs-heading h2 { font-size: 4.1rem; }
 				.specs-heading > p { margin-top: 30px; }
-				.specs-grid { grid-template-columns: 1fr; }
-				.spec-card, .spec-card-wide, .spec-runtime { grid-column: 1; min-height: 290px; }
+				.specs-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+				.spec-card, .spec-card-wide, .spec-runtime { grid-column: auto; min-height: 220px; padding: 18px 16px; border-radius: 16px; }
 				.spec-card-wide { flex-direction: column; align-items: flex-start; }
-				.sound-wave { width: 70%; height: 110px; align-self: center; }
+				.spec-card p { margin-bottom: 9px; font-size: .56rem; line-height: 1.35; letter-spacing: .1em; }
+				.spec-card h3 { font-size: clamp(1.35rem, 5.5vw, 1.7rem); }
+				.spec-runtime strong { font-size: clamp(3.7rem, 17vw, 5rem); }
+				.spec-runtime strong small { margin-left: 3px; }
+				.spec-runtime > span:not(.spec-index) { margin-top: 18px; font-size: .56rem; letter-spacing: .09em; }
+				.spec-index { top: 15px; right: 14px; }
+				.spec-symbol { top: 15px; left: 16px; font-size: 1.8rem; }
+				.sound-wave { width: 100%; height: 72px; align-self: center; gap: 4px; }
+				.sound-wave span { width: 3px; }
 				.gallery-section { padding-bottom: 100px; }
 				.gallery-heading { display: block; margin-bottom: 42px; }
 				.gallery-heading h2 { font-size: 4.1rem; }
