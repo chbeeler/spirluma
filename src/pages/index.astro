@@ -70,8 +70,8 @@ const compactBrandSpiralPath = createSpiralPath(3.6, svgOuterRadius, 12, 180);
 					<h1 id="hero-title">Wear the<br /><em>glow.</em></h1>
 					<p class="hero-intro">A luminous spiral for dance floors, midnight walks and every beautifully strange place in between.</p>
 					<div class="hero-actions">
-						<a class="button button-primary" href="#contact">Waitlist <span aria-hidden="true">→</span></a>
-						<a class="text-link" href="#gallery">See it shine <span aria-hidden="true">↘</span></a>
+						<a class="button button-primary" href="#contact">Waitlist <svg class="cta-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M14 7l5 5-5 5" /></svg></a>
+						<a class="text-link" href="#gallery">See it shine <svg class="cta-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 8v10H8" /></svg></a>
 					</div>
 				</div>
 
@@ -254,11 +254,20 @@ const compactBrandSpiralPath = createSpiralPath(3.6, svgOuterRadius, 12, 180);
 				const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
 				menuButton.setAttribute('aria-expanded', String(!isOpen));
 				nav?.classList.toggle('is-open', !isOpen);
+				document.body.classList.toggle('menu-open', !isOpen);
 			});
 			nav?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
 				menuButton?.setAttribute('aria-expanded', 'false');
 				nav.classList.remove('is-open');
+				document.body.classList.remove('menu-open');
 			}));
+			document.addEventListener('keydown', (event) => {
+				if (event.key !== 'Escape' || menuButton?.getAttribute('aria-expanded') !== 'true') return;
+				menuButton.setAttribute('aria-expanded', 'false');
+				nav?.classList.remove('is-open');
+				document.body.classList.remove('menu-open');
+				if (menuButton instanceof HTMLElement) menuButton.focus();
+			});
 
 			const copy = {
 				form: 'Starting at twelve o’clock, the filament follows an evenly pitched spiral before opening into a softer inner curl.',
@@ -479,6 +488,7 @@ const compactBrandSpiralPath = createSpiralPath(3.6, svgOuterRadius, 12, 180);
 			.button-primary:hover, .button-primary:focus-visible { transform: translateY(-2px); box-shadow: 0 10px 36px rgba(255,198,66,.2); background: #ffd264; }
 			.text-link { display: inline-flex; gap: 16px; font-size: .77rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; border-bottom: 1px solid var(--outline); padding: 12px 0; }
 			.text-link:hover { color: var(--gold); border-color: var(--gold); }
+			.cta-arrow { flex: 0 0 auto; width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 
 			.hero-visual { position: relative; width: min(50vw, 600px); margin-left: auto; }
 			/* Keep the photo's proportions so the callouts stay anchored to the pendant. */
@@ -635,7 +645,7 @@ const compactBrandSpiralPath = createSpiralPath(3.6, svgOuterRadius, 12, 180);
 
 			@media (max-width: 720px) {
 				:root { --shell: calc(100% - 28px); --radius: 22px; }
-				.site-header { height: 74px; }
+				.site-header { left: 14px; right: 14px; width: auto; height: 74px; transform: none; }
 				.site-header .brand { position: relative; z-index: 12; }
 				.brand-mark { width: 30px; height: 30px; stroke-width: 15; }
 				.brand-spiral-full { display: none; }
@@ -644,9 +654,10 @@ const compactBrandSpiralPath = createSpiralPath(3.6, svgOuterRadius, 12, 180);
 				.menu-toggle span:not(.sr-only) { display: block; width: 17px; height: 1px; background: #fff; transition: transform .2s ease; }
 				.menu-toggle[aria-expanded="true"] span:nth-child(2) { transform: translateY(4px) rotate(45deg); }
 				.menu-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-4px) rotate(-45deg); }
-				.site-nav { position: fixed; inset: 0; display: flex; flex-direction: column; justify-content: center; gap: 30px; background: rgba(15,15,16,.97); opacity: 0; pointer-events: none; transition: opacity .2s ease; }
+				.site-nav { position: fixed; z-index: 11; inset: 0; width: 100%; height: 100vh; height: 100dvh; padding: calc(74px + env(safe-area-inset-top)) 28px max(36px, env(safe-area-inset-bottom)); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 34px; background: #0f0f10; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .2s ease, visibility 0s linear .2s; }
 				.site-nav a { font-size: 1rem; }
-				.site-nav.is-open { opacity: 1; pointer-events: auto; }
+				.site-nav.is-open { opacity: 1; visibility: visible; pointer-events: auto; transition-delay: 0s; }
+				body.menu-open { overflow: hidden; }
 				.hero { display: flex; flex-direction: column; align-items: stretch; padding: 112px 14px 42px; min-height: auto; }
 				.hero::before { width: 100%; }
 				.hero-copy { padding: 0; }
